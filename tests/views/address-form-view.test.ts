@@ -8,12 +8,13 @@ import { NumberFieldElement } from '@vaadin/vaadin-text-field/vaadin-number-fiel
 import { ComboBoxElement } from '@vaadin/vaadin-combo-box';
 import { ButtonElement } from '@vaadin/vaadin-button';
 import { AddressFormView } from '../../frontend/views/addressform/address-form-view';
+import { EndpointError } from '@vaadin/flow-frontend';
 import '../../frontend/views/addressform/address-form-view';
 
 @customElement('test-address-form')
 class TestAddressForm extends AddressFormView {
   clearSpy = sinon.spy(this.binder, 'clear');
-  submitSpy = sinon.spy(this.binder, 'submitTo');
+  submitStub = sinon.stub(this.binder, 'submitTo');
 }
 
 describe('address-form-view', () => {
@@ -46,8 +47,25 @@ describe('address-form-view', () => {
 
     it('should submit the binder on Save button click', async () => {
       buttons[0].click();
-      await view.submitSpy.returnValues[0];
-      expect(view.submitSpy.calledOnce).to.be.true;
+      await view.updateComplete;
+      expect(view.submitStub.calledOnce).to.be.true;
+    });
+
+    it('should clear the binder on Save button click', async () => {
+      buttons[0].click();
+      await view.updateComplete;
+      expect(view.clearSpy.calledOnce).to.be.true;
+    });
+
+    it('should not clear the binder on endpoint error', async () => {
+      view.submitStub.rejects(new EndpointError('No space left'));
+      try {
+        buttons[0].click();
+        await view.submitStub.returnValues[0];
+      } catch (e) {
+        // do nothing
+      }
+      expect(view.clearSpy.calledOnce).to.be.false;
     });
   });
 
