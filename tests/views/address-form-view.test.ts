@@ -37,12 +37,18 @@ describe('address-form-view', () => {
   });
 
   describe('save', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       address.value = '1234 Main Street';
+      address.dispatchEvent(new CustomEvent('change'));
       code.value = '02000';
+      code.dispatchEvent(new CustomEvent('change'));
       city.value = 'City 1';
+      city.dispatchEvent(new CustomEvent('change'));
       state.value = 'State 1';
+      state.dispatchEvent(new CustomEvent('change'));
       country.value = 'Country 1';
+      country.dispatchEvent(new CustomEvent('change'));
+      await view.updateComplete;
     });
 
     it('should submit the binder on Save button click', async () => {
@@ -70,12 +76,18 @@ describe('address-form-view', () => {
   });
 
   describe('clear', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       address.value = '1234 Main Street';
+      address.dispatchEvent(new CustomEvent('change'));
       code.value = '02000';
+      code.dispatchEvent(new CustomEvent('change'));
       city.value = 'City 1';
+      city.dispatchEvent(new CustomEvent('change'));
       state.value = 'State 1';
+      state.dispatchEvent(new CustomEvent('change'));
       country.value = 'Country 1';
+      country.dispatchEvent(new CustomEvent('change'));
+      await view.updateComplete;
     });
 
     it('should clear the binder on Clear button click', () => {
@@ -83,8 +95,7 @@ describe('address-form-view', () => {
       expect(view.clearSpy.calledOnce).to.be.true;
     });
 
-    // FIXME: the clear method does not clear the fields
-    it.skip('should clear the fields on Clear button click', async () => {
+    it('should clear the fields on Clear button click', async () => {
       buttons[1].click();
       await view.updateComplete;
       expect(address.value).to.be.equal('');
