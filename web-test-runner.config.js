@@ -22,7 +22,9 @@ module.exports = {
             // See https://github.com/mobxjs/mobx/issues/2564#issuecomment-759406946
             mobx: './node_modules/mobx/dist/mobx.esm.development.js',
             // mock theme to avoid using plugins to import CSS
-            'Frontend/generated/theme': `${MOCKS}/mock-theme.js`
+            'Frontend/generated/theme': `${MOCKS}/mock-theme.js`,
+            // Mock the notification utility to avoid polluting DOM.
+            '@vaadin/flow-frontend/a-notification': `${MOCKS}/mock-notification.js`
           },
         },
       },

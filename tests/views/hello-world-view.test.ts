@@ -4,6 +4,7 @@ import { html } from 'lit';
 import { TextFieldElement } from '@vaadin/vaadin-text-field';
 import { ButtonElement } from '@vaadin/vaadin-button';
 import { HelloWorldView } from '../../frontend/views/helloworld/hello-world-view';
+import { showNotification } from '../mocks/mock-notification';
 import '../../frontend/views/helloworld/hello-world-view';
 
 describe('hello-world-view', () => {
@@ -28,9 +29,8 @@ describe('hello-world-view', () => {
     it('should show notification with a name on button click', () => {
       field.value = NAME;
       button.click();
-      const notification = document.querySelector('vaadin-notification-card');
-      expect(notification).to.be.ok;
-      expect(notification.textContent).to.contain(NAME);
+      expect(showNotification.calledOnce).to.be.true;
+      expect(showNotification.firstCall.args[0]).to.contain(NAME);
     });
   });
 });

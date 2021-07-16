@@ -9,6 +9,7 @@ import { ComboBoxElement } from '@vaadin/vaadin-combo-box';
 import { ButtonElement } from '@vaadin/vaadin-button';
 import { AddressFormView } from '../../frontend/views/addressform/address-form-view';
 import { EndpointError } from '@vaadin/flow-frontend';
+import { showNotification } from '../mocks/mock-notification';
 import { setValue } from '../helpers/events';
 import '../../frontend/views/addressform/address-form-view';
 
@@ -48,27 +49,62 @@ describe('address-form-view', () => {
       await view.updateComplete;
     });
 
-    it('should submit the binder on Save button click', async () => {
-      buttons[0].click();
-      await view.updateComplete;
-      expect(view.submitStub.calledOnce).to.be.true;
-    });
+    describe('success', () => {
+      afterEach(() => {
+        showNotification.resetHistory();
+      })
 
-    it('should clear the binder on Save button click', async () => {
-      buttons[0].click();
-      await view.updateComplete;
-      expect(view.clearSpy.calledOnce).to.be.true;
-    });
-
-    it('should not clear the binder on endpoint error', async () => {
-      view.submitStub.rejects(new EndpointError('No space left'));
-      try {
+      it('should submit the binder on Save button click', async () => {
         buttons[0].click();
-        await view.submitStub.returnValues[0];
-      } catch (e) {
-        // do nothing
-      }
-      expect(view.clearSpy.calledOnce).to.be.false;
+        await view.updateComplete;
+        expect(view.submitStub.calledOnce).to.be.true;
+      });
+
+      it('should clear the binder on Save button click', async () => {
+        buttons[0].click();
+        await view.updateComplete;
+        expect(view.clearSpy.calledOnce).to.be.true;
+      });
+
+      it('should show notification on binder submit success', async () => {
+        buttons[0].click();
+        await view.updateComplete;
+        expect(showNotification.calledOnce).to.be.true;
+        expect(showNotification.firstCall.args[0]).to.contain('SampleAddress stored.');
+      });
+    });
+
+    describe('error', () => {
+      const ERROR = 'No space left';
+
+      beforeEach(() => {
+        view.submitStub.rejects(new EndpointError(ERROR));
+      });
+
+      afterEach(() => {
+        showNotification.resetHistory();
+      });
+
+      it('should not clear the binder on endpoint error', async () => {
+        try {
+          buttons[0].click();
+          await view.submitStub.returnValues[0];
+        } catch (e) {
+          // do nothing
+        }
+        expect(view.clearSpy.calledOnce).to.be.false;
+      });
+
+      it('should shot notification on endpoint error', async () => {
+        try {
+          buttons[0].click();
+          await view.submitStub.returnValues[0];
+        } catch (e) {
+          // do nothing
+        }
+        expect(showNotification.calledOnce).to.be.true;
+        expect(showNotification.firstCall.args[0]).to.contain(ERROR);
+      });
     });
   });
 
