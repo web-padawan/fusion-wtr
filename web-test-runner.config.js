@@ -23,6 +23,8 @@ module.exports = {
             mobx: './node_modules/mobx/dist/mobx.esm.development.js',
             // mock theme to avoid using plugins to import CSS
             'Frontend/generated/theme': `${MOCKS}/mock-theme.js`,
+            // mock Fusion endpoints to
+            'Frontend/generated/SampleAddressEndpoint': `${MOCKS}/endpoints/MockSampleAddressEndpoint.js`,
           },
         },
       },

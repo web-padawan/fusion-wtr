@@ -21,7 +21,7 @@ export class AddressFormView extends View {
   @query('#country')
   private country!: ComboBoxElement | null;
 
-  private binder = new Binder(this, SampleAddressModel);
+  protected binder = new Binder(this, SampleAddressModel);
 
   protected firstUpdated(_changedProperties: PropertyValues) {
     super.firstUpdated(_changedProperties);
