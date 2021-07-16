@@ -9,6 +9,7 @@ import { ComboBoxElement } from '@vaadin/vaadin-combo-box';
 import { ButtonElement } from '@vaadin/vaadin-button';
 import { AddressFormView } from '../../frontend/views/addressform/address-form-view';
 import { EndpointError } from '@vaadin/flow-frontend';
+import { setValue } from '../helpers/events';
 import '../../frontend/views/addressform/address-form-view';
 
 @customElement('test-address-form')
@@ -38,16 +39,12 @@ describe('address-form-view', () => {
 
   describe('save', () => {
     beforeEach(async () => {
-      address.value = '1234 Main Street';
-      address.dispatchEvent(new CustomEvent('change'));
-      code.value = '02000';
-      code.dispatchEvent(new CustomEvent('change'));
-      city.value = 'City 1';
-      city.dispatchEvent(new CustomEvent('change'));
-      state.value = 'State 1';
-      state.dispatchEvent(new CustomEvent('change'));
-      country.value = 'Country 1';
-      country.dispatchEvent(new CustomEvent('change'));
+      // Fill in all the fields
+      setValue(address, '1234 Main Street');
+      setValue(code, '02000');
+      setValue(city, 'City 1');
+      setValue(city, 'State 1');
+      setValue(country, 'Country 1');
       await view.updateComplete;
     });
 
@@ -77,16 +74,12 @@ describe('address-form-view', () => {
 
   describe('clear', () => {
     beforeEach(async () => {
-      address.value = '1234 Main Street';
-      address.dispatchEvent(new CustomEvent('change'));
-      code.value = '02000';
-      code.dispatchEvent(new CustomEvent('change'));
-      city.value = 'City 1';
-      city.dispatchEvent(new CustomEvent('change'));
-      state.value = 'State 1';
-      state.dispatchEvent(new CustomEvent('change'));
-      country.value = 'Country 1';
-      country.dispatchEvent(new CustomEvent('change'));
+      // Fill in all the fields
+      setValue(address, '1234 Main Street');
+      setValue(code, '02000');
+      setValue(city, 'City 1');
+      setValue(city, 'State 1');
+      setValue(country, 'Country 1');
       await view.updateComplete;
     });
 
