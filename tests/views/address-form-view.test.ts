@@ -15,8 +15,9 @@ import '../../frontend/views/addressform/address-form-view';
 
 @customElement('test-address-form')
 class TestAddressForm extends AddressFormView {
-  clearSpy = sinon.spy(this.binder, 'clear');
-  submitStub = sinon.stub(this.binder, 'submitTo');
+  mockSubmit = sinon.stub(this.binder, 'submitTo');
+  spyClear = sinon.spy(this.binder, 'clear');
+  spySave = sinon.spy(this, 'save');
 }
 
 describe('address-form-view', () => {
@@ -57,13 +58,13 @@ describe('address-form-view', () => {
       it('should submit the binder on Save button click', async () => {
         buttons[0].click();
         await view.updateComplete;
-        expect(view.submitStub.calledOnce).to.be.true;
+        expect(view.mockSubmit.calledOnce).to.be.true;
       });
 
       it('should clear the binder on Save button click', async () => {
         buttons[0].click();
         await view.updateComplete;
-        expect(view.clearSpy.calledOnce).to.be.true;
+        expect(view.spyClear.calledOnce).to.be.true;
       });
 
       it('should show notification on binder submit success', async () => {
@@ -78,7 +79,7 @@ describe('address-form-view', () => {
       const ERROR = 'No space left';
 
       beforeEach(() => {
-        view.submitStub.rejects(new EndpointError(ERROR));
+        view.mockSubmit.rejects(new EndpointError(ERROR));
       });
 
       afterEach(() => {
@@ -86,22 +87,14 @@ describe('address-form-view', () => {
       });
 
       it('should not clear the binder on endpoint error', async () => {
-        try {
-          buttons[0].click();
-          await view.submitStub.returnValues[0];
-        } catch (e) {
-          // do nothing
-        }
-        expect(view.clearSpy.calledOnce).to.be.false;
+        buttons[0].click();
+        await view.spySave.firstCall;
+        expect(view.spyClear.calledOnce).to.be.false;
       });
 
       it('should shot notification on endpoint error', async () => {
-        try {
-          buttons[0].click();
-          await view.submitStub.returnValues[0];
-        } catch (e) {
-          // do nothing
-        }
+        buttons[0].click();
+        await view.spySave.firstCall;
         expect(showNotification.calledOnce).to.be.true;
         expect(showNotification.firstCall.args[0]).to.contain(ERROR);
       });
@@ -121,7 +114,7 @@ describe('address-form-view', () => {
 
     it('should clear the binder on Clear button click', () => {
       buttons[1].click();
-      expect(view.clearSpy.calledOnce).to.be.true;
+      expect(view.spyClear.calledOnce).to.be.true;
     });
 
     it('should clear the fields on Clear button click', async () => {

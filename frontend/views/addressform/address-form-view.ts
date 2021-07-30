@@ -47,7 +47,7 @@ export class AddressFormView extends View {
     `;
   }
 
-  private async save() {
+  async save() {
     try {
       await this.binder.submitTo(SampleAddressEndpoint.update);
       this.clearForm();
