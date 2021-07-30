@@ -112,8 +112,9 @@ describe('address-form-view', () => {
       await view.updateComplete;
     });
 
-    it('should clear the binder on Clear button click', () => {
+    it('should clear the binder on Clear button click', async () => {
       buttons[1].click();
+      await view.updateComplete;
       expect(view.spyClear.calledOnce).to.be.true;
     });
 
