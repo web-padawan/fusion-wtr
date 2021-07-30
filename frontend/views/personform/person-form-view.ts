@@ -26,7 +26,7 @@ export class PersonFormViewElement extends View {
   @query('#countryCode')
   private countryCode!: ComboBoxElement | null;
 
-  private binder = new Binder(this, SamplePersonModel);
+  protected binder = new Binder(this, SamplePersonModel);
 
   protected firstUpdated(_changedProperties: PropertyValues) {
     super.firstUpdated(_changedProperties);
@@ -67,7 +67,7 @@ export class PersonFormViewElement extends View {
     `;
   }
 
-  private async save() {
+  async save() {
     try {
       await this.binder.submitTo(SamplePersonEndpoint.update);
       this.clearForm();

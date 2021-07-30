@@ -4,49 +4,53 @@ import { fixture } from '@open-wc/testing-helpers';
 import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { TextFieldElement } from '@vaadin/vaadin-text-field';
-import { NumberFieldElement } from '@vaadin/vaadin-text-field/vaadin-number-field';
-import { ComboBoxElement } from '@vaadin/vaadin-combo-box';
+import { EmailFieldElement } from '@vaadin/vaadin-text-field/vaadin-email-field';
+import { DatePickerElement } from '@vaadin/vaadin-date-picker';
+import { CustomFieldElement } from '@vaadin/vaadin-custom-field';
 import { ButtonElement } from '@vaadin/vaadin-button';
-import { AddressFormView } from '../../frontend/views/addressform/address-form-view';
+import { PersonFormViewElement } from '../../frontend/views/personform/person-form-view';
 import { EndpointError } from '@vaadin/flow-frontend';
 import { showNotification } from '../mocks/mock-notification';
 import { setValue } from '../helpers/setValue';
-import '../../frontend/views/addressform/address-form-view';
+import '../../frontend/views/personform/person-form-view';
 
-@customElement('test-address-form')
-class TestAddressForm extends AddressFormView {
+@customElement('test-person-form')
+class TestPersonForm extends PersonFormViewElement {
   mockSubmit = sinon.stub(this.binder, 'submitTo');
   spyClear = sinon.spy(this.binder, 'clear');
   spySave = sinon.spy(this, 'save');
 }
 
-describe('address-form-view', () => {
-  let view: TestAddressForm;
+describe('person-form-view', () => {
+  let view: TestPersonForm;
   let buttons: Array<ButtonElement>;
-  let address: TextFieldElement;
-  let code: NumberFieldElement;
-  let city: TextFieldElement;
-  let state: ComboBoxElement;
-  let country: ComboBoxElement;
+  let firstName: TextFieldElement;
+  let lastName: TextFieldElement;
+  let birthDay: DatePickerElement;
+  let phone: CustomFieldElement;
+  let email: EmailFieldElement;
+  let occupation: TextFieldElement;
 
   beforeEach(async () => {
-    view = await fixture(html`<test-address-form></test-address-form>`);
+    view = await fixture(html`<test-person-form></test-person-form>`);
     buttons = Array.from(view.querySelectorAll('vaadin-button'));
-    address = view.querySelector('[label="Street address"]');
-    code = view.querySelector('[label="Postal code"]');
-    city = view.querySelector('[label="City"]');
-    state = view.querySelector('#state');
-    country = view.querySelector('#country');
+    firstName = view.querySelector('[label="First name"]');
+    lastName = view.querySelector('[label="Last name"]');
+    birthDay = view.querySelector('[label="Birthday"]');
+    phone = view.querySelector('[label="Phone number"]');
+    email = view.querySelector('[label="Email address"]');
+    occupation = view.querySelector('[label="Occupation"]');
   });
 
   describe('save', () => {
     beforeEach(async () => {
       // Fill in all the fields
-      setValue(address, '1234 Main Street');
-      setValue(code, '02000');
-      setValue(city, 'City 1');
-      setValue(city, 'State 1');
-      setValue(country, 'Country 1');
+      setValue(firstName, 'John');
+      setValue(lastName, 'Doe');
+      setValue(birthDay, '1990-01-28');
+      setValue(phone, '+354\t94\t7891234');
+      setValue(email, 'john.doe@gmail.com');
+      setValue(occupation, 'scientist');
       await view.updateComplete;
     });
 
@@ -71,7 +75,7 @@ describe('address-form-view', () => {
         buttons[0].click();
         await view.updateComplete;
         expect(showNotification.calledOnce).to.be.true;
-        expect(showNotification.firstCall.args[0]).to.contain('SampleAddress stored.');
+        expect(showNotification.firstCall.args[0]).to.contain('SamplePerson details stored.');
       });
     });
 
@@ -104,11 +108,12 @@ describe('address-form-view', () => {
   describe('clear', () => {
     beforeEach(async () => {
       // Fill in all the fields
-      setValue(address, '1234 Main Street');
-      setValue(code, '02000');
-      setValue(city, 'City 1');
-      setValue(city, 'State 1');
-      setValue(country, 'Country 1');
+      setValue(firstName, 'John');
+      setValue(lastName, 'Doe');
+      setValue(birthDay, '1990-01-28');
+      setValue(phone, '+354\t94\t7891234');
+      setValue(email, 'john.doe@gmail.com');
+      setValue(occupation, 'scientist');
       await view.updateComplete;
     });
 
@@ -121,11 +126,12 @@ describe('address-form-view', () => {
     it('should clear the fields on Clear button click', async () => {
       buttons[1].click();
       await view.updateComplete;
-      expect(address.value).to.be.equal('');
-      expect(code.value).to.be.equal('');
-      expect(city.value).to.be.equal('');
-      expect(state.value).to.be.equal('');
-      expect(country.value).to.be.equal('');
+      expect(firstName.value).to.be.equal('');
+      expect(lastName.value).to.be.equal('');
+      expect(birthDay.value).to.be.equal('');
+      expect(phone.value).to.be.equal('');
+      expect(email.value).to.be.equal('');
+      expect(occupation.value).to.be.equal('');
     });
   });
 });

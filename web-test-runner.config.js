@@ -38,4 +38,10 @@ module.exports = {
       ],
     }),
   ],
+  testFramework: {
+    config: {
+      ui: 'bdd',
+      timeout: '10000'
+    }
+  },
 };
