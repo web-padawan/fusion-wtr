@@ -92,7 +92,7 @@ describe('address-form-view', () => {
         expect(view.spyClear.calledOnce).to.be.false;
       });
 
-      it('should shot notification on endpoint error', async () => {
+      it('should show notification on endpoint error', async () => {
         buttons[0].click();
         await view.spySave.firstCall;
         expect(showNotification.calledOnce).to.be.true;
