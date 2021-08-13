@@ -24,7 +24,9 @@ module.exports = {
             // mock theme to avoid using plugins to import CSS
             'Frontend/generated/theme': `${MOCKS}/mock-theme.js`,
             // Mock the notification utility to avoid polluting DOM.
-            '@vaadin/flow-frontend/a-notification': `${MOCKS}/mock-notification.js`
+            '@vaadin/flow-frontend/a-notification': `${MOCKS}/mock-notification.js`,
+            // Mock the Fusion endpoints to avoid network requests.
+            'Frontend/generated/SamplePersonEndpoint': `${MOCKS}/endpoints/SamplePersonEndpoint.js`
           },
         },
       },
