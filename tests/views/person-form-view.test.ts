@@ -12,6 +12,7 @@ import { PersonFormViewElement } from '../../frontend/views/personform/person-fo
 import { EndpointError } from '@vaadin/flow-frontend';
 import { showNotification } from '../mocks/mock-notification';
 import { setValue } from '../helpers/setValue';
+import '../helpers/promise';
 import '../../frontend/views/personform/person-form-view';
 
 @customElement('test-person-form')
@@ -79,7 +80,7 @@ describe('person-form-view', () => {
       });
     });
 
-    describe('error', () => {
+    describe('endpoint error', () => {
       const ERROR = 'No space left';
 
       beforeEach(() => {
@@ -101,6 +102,18 @@ describe('person-form-view', () => {
         await view.spySave.firstCall;
         expect(showNotification.calledOnce).to.be.true;
         expect(showNotification.firstCall.args[0]).to.contain(ERROR);
+      });
+    });
+
+    describe('unknown error', () => {
+      const ERROR = 'Server Unavailable';
+
+      beforeEach(() => {
+        view.mockSubmit.rejects(new Error(ERROR));
+      });
+
+      it('should throw an exception on unknown error', () => {
+        expect(view.save()).to.eventually.be.rejectedWith(Error);
       });
     });
   });

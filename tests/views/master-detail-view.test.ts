@@ -12,6 +12,7 @@ import { EndpointError } from '@vaadin/flow-frontend';
 import { showNotification } from '../mocks/mock-notification';
 import { getBodyCellContent } from '../helpers/grid';
 import { setValue } from '../helpers/setValue';
+import '../helpers/promise';
 import SamplePerson from '../../frontend/generated/com/example/application/data/entity/SamplePerson';
 import { get, list } from '../mocks/endpoints/SamplePersonEndpoint';
 import '../../frontend/views/masterdetail/master-detail-view';
@@ -152,7 +153,7 @@ describe('master-detail-view', () => {
       });
     });
 
-    describe('error', () => {
+    describe('endpoint error', () => {
       const ERROR = 'No space left';
 
       beforeEach(async () => {
@@ -175,6 +176,18 @@ describe('master-detail-view', () => {
         await view.spySave.firstCall;
         expect(showNotification.calledOnce).to.be.true;
         expect(showNotification.firstCall.args[0]).to.contain(ERROR);
+      });
+    });
+
+    describe('unknown error', () => {
+      const ERROR = 'Server Unavailable';
+
+      beforeEach(() => {
+        view.mockSubmit.rejects(new Error(ERROR));
+      });
+
+      it('should throw an exception on unknown error', () => {
+        expect(view.save()).to.eventually.be.rejectedWith(Error);
       });
     });
   });

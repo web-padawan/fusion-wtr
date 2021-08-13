@@ -56,9 +56,11 @@ dependencies:
   mobx: 6.3.2
 devDependencies:
   '@esm-bundle/chai': 4.3.0
+  '@esm-bundle/chai-as-promised': 7.1.1
   '@open-wc/testing-helpers': 2.0.0-next.0
   '@rollup/plugin-alias': 3.1.4
   '@types/chai': 4.2.21
+  '@types/chai-as-promised': 7.1.4
   '@types/sinon': 9.0.11
   '@types/validator': 13.1.0
   '@vaadin/application-theme-plugin': link:target/plugins/application-theme-plugin
@@ -1246,6 +1248,10 @@ packages:
       node: '>=6.9.0'
     resolution:
       integrity: sha512-M/NzBpEL95I5Hh4dwhin5JlE7EzO5PHMAuzjxss3tiOBD46KfQvVedN/3jEPZvdRvtsK2222XfdHogNIttFgcg==
+  /@esm-bundle/chai-as-promised/7.1.1:
+    dev: true
+    resolution:
+      integrity: sha512-qhDeW3gK3ITAzzhZj8QfvuhX7iNqyzooVZJnoW5bjIotxxJM92O9EKxdxBg4B35hjh3tV1chlEgC/pfR9cVRlA==
   /@esm-bundle/chai/4.3.0:
     dependencies:
       '@types/chai': 4.2.21
@@ -1578,6 +1584,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-a6bTJ21vFOGIkwM0kzh9Yr89ziVxq4vYH2fQ6N8AeipEzai/cFK6aGMArIkUeIdRIgpwQa+2bXiLuUJCpSf2Cg==
+  /@types/chai-as-promised/7.1.4:
+    dependencies:
+      '@types/chai': 4.2.21
+    dev: true
+    resolution:
+      integrity: sha512-1y3L1cHePcIm5vXkh1DSGf/zQq5n5xDKG1fpCvf18+uOkpce0Z1ozNFPkyWsVswK7ntN1sZBw3oU6gmN+pDUcA==
   /@types/chai/4.2.21:
     dev: true
     resolution:
@@ -9794,12 +9806,14 @@ packages:
 specifiers:
   '@adobe/lit-mobx': 2.0.0-rc.4
   '@esm-bundle/chai': 4.3.0
+  '@esm-bundle/chai-as-promised': ^7.1.1
   '@open-wc/testing-helpers': ^2.0.0-next.0
   '@polymer/iron-icon': 3.0.1
   '@polymer/iron-list': 3.1.0
   '@polymer/polymer': 3.2.0
   '@rollup/plugin-alias': ^3.1.2
   '@types/chai': ^4.2.15
+  '@types/chai-as-promised': ^7.1.4
   '@types/sinon': ^9.0.11
   '@types/validator': 13.1.0
   '@vaadin/application-theme-plugin': ./target/plugins/application-theme-plugin

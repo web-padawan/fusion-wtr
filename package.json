@@ -64,9 +64,11 @@
   },
   "devDependencies": {
     "@esm-bundle/chai": "4.3.0",
+    "@esm-bundle/chai-as-promised": "^7.1.1",
     "@open-wc/testing-helpers": "^2.0.0-next.0",
     "@rollup/plugin-alias": "^3.1.2",
     "@types/chai": "^4.2.15",
+    "@types/chai-as-promised": "^7.1.4",
     "@types/sinon": "^9.0.11",
     "@types/validator": "13.1.0",
     "@vaadin/application-theme-plugin": "./target/plugins/application-theme-plugin",
@@ -178,6 +180,6 @@
       "workbox-precaching": "6.1.0",
       "workbox-webpack-plugin": "6.1.0"
     },
-    "hash": "e05cec9b7e5cd0b7a3cb3378fa6f606dbe0d3d4ec36f88db38ba0e7059fcdfd7"
+    "hash": "13e64efae778993310e24e8b95781da03333e6d19ba4136a177f50c8c349c0eb"
   }
 }
