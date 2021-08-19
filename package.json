@@ -75,9 +75,9 @@
     "@vaadin/stats-plugin": "./target/plugins/stats-plugin",
     "@vaadin/theme-live-reload-plugin": "./target/plugins/theme-live-reload-plugin",
     "@vaadin/theme-loader": "./target/plugins/theme-loader",
-    "@web/dev-server-esbuild": "^0.2.12",
-    "@web/dev-server-import-maps": "0.0.5",
-    "@web/test-runner": "^0.13.13",
+    "@web/dev-server-esbuild": "^0.2.13",
+    "@web/dev-server-import-maps": "0.0.6",
+    "@web/test-runner": "^0.13.16",
     "chokidar": "^3.5.0",
     "compression-webpack-plugin": "4.0.1",
     "css-loader": "4.2.1",
@@ -180,6 +180,6 @@
       "workbox-precaching": "6.1.0",
       "workbox-webpack-plugin": "6.1.0"
     },
-    "hash": "13e64efae778993310e24e8b95781da03333e6d19ba4136a177f50c8c349c0eb"
+    "hash": "acd50a74bedf8baa9e77e5d74f46879ab120342098463fcd17f9b9fc18634854"
   }
 }
