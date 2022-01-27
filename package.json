@@ -1,6 +1,10 @@
 {
   "name": "no-name",
   "license": "UNLICENSED",
+  "scripts": {
+    "debug": "web-test-runner tests/**/*.test.ts --watch",
+    "test": "web-test-runner tests/**/*.test.ts"
+  },
   "dependencies": {
     "@adobe/lit-mobx": "2.0.0-rc.4",
     "@polymer/iron-icon": "3.0.1",
@@ -59,11 +63,21 @@
     "mobx": "^6.1.5"
   },
   "devDependencies": {
+    "@esm-bundle/chai": "4.3.0",
+    "@esm-bundle/chai-as-promised": "^7.1.1",
+    "@open-wc/testing-helpers": "^2.0.0-next.0",
+    "@rollup/plugin-alias": "^3.1.2",
+    "@types/chai": "^4.2.15",
+    "@types/chai-as-promised": "^7.1.4",
+    "@types/sinon": "^9.0.11",
     "@types/validator": "13.1.0",
     "@vaadin/application-theme-plugin": "./target/plugins/application-theme-plugin",
     "@vaadin/stats-plugin": "./target/plugins/stats-plugin",
     "@vaadin/theme-live-reload-plugin": "./target/plugins/theme-live-reload-plugin",
     "@vaadin/theme-loader": "./target/plugins/theme-loader",
+    "@web/dev-server-esbuild": "^0.2.13",
+    "@web/dev-server-import-maps": "0.0.6",
+    "@web/test-runner": "^0.13.16",
     "chokidar": "^3.5.0",
     "compression-webpack-plugin": "4.0.1",
     "css-loader": "4.2.1",
@@ -75,6 +89,7 @@
     "html-webpack-plugin": "4.5.1",
     "lit-css-loader": "0.1.0",
     "loader-utils": "2.0.0",
+    "sinon": "^9.2.4",
     "ts-loader": "8.0.12",
     "typescript": "4.3.3",
     "validator": "13.1.17",
@@ -165,6 +180,6 @@
       "workbox-precaching": "6.1.0",
       "workbox-webpack-plugin": "6.1.0"
     },
-    "hash": "43a1fc199568a8a7d7ce0ffd2ef7cd945ca5434b04ceb56661a6250857f69f62"
+    "hash": "acd50a74bedf8baa9e77e5d74f46879ab120342098463fcd17f9b9fc18634854"
   }
 }

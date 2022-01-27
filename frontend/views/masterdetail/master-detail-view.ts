@@ -32,7 +32,7 @@ export class MasterDetailView extends View {
 
   private gridDataProvider = this.getGridData.bind(this);
 
-  private binder = new Binder<SamplePerson, SamplePersonModel>(this, SamplePersonModel);
+  protected binder = new Binder<SamplePerson, SamplePersonModel>(this, SamplePersonModel);
 
   render() {
     return html`
@@ -138,7 +138,7 @@ export class MasterDetailView extends View {
     }
   }
 
-  private async save() {
+  async save() {
     try {
       const isNew = !this.binder.value.id;
       await this.binder.submitTo(SamplePersonEndpoint.update);
